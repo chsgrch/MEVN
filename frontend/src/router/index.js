@@ -11,7 +11,7 @@ import contacts from "../views/Contacts.vue";
 import partners from "../views/Partners.vue";
 
 // import Router from "vue-router";
-import store from "../store.js";
+import store from "../store";
 import Login from "../components/Login.vue";
 import Secure from "../components/Secure.vue";
 import Register from "../components/Register.vue";
