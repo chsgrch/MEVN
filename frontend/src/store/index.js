@@ -1,16 +1,20 @@
 import Vue from "vue";
 import Vuex from "vuex";
-
 import user from "./modules/user";
-import feedback from "./modules/feedaback";
-import vacancies from "./modules/vacancies";
+import feedbackMod from "./modules/feedaback";
+import vacancyMod from "./modules/vacancies";
+import { state } from './initialState'
+import { getters } from './getters';
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
+  state,
+  getters,
   modules: {
     user,
-    vacancies,
-    feedback
+    vacancyMod,
+    feedbackMod
   }
 });
+export default store;

@@ -1,36 +1,29 @@
 import { loginApi, registerApi, logOutApi } from "../../api/userAuthApi";
 
-const state = {
-    status: "",
-    token: localStorage.getItem("token") || "",
-    user: {},
-    role: ""
-  },
-  getters = {
-    isLoggedIn: state => !!state.token,
-    authStatus: state => state.status,
-    userRole: state => state.role
-  },
-  mutations = {
+const user = {
+
+  mutations: {
     AUTH_REQUEST(state) {
-      state.status = "loading";
+      this.state.status = "loading";
     },
     AUTH_SUCESS(state, userRespData) {
-      state.status = "success";
-      state.token = userRespData.token;
-      state.user = userRespData;
-      state.role = userRespData.user.role;
+      this.state.status = "success";
+      this.state.token = userRespData.token;
+      this.state.user = userRespData;
+      this.state.role = userRespData.user.role;
+      this.state.userName = userRespData.user.username
     },
     AUTH_ERROR(state) {
-      state.status = "error";
+      this.state.status = "error";
     },
     LOGOUT(state) {
-      state.status = "";
-      state.token = "";
-      state.role = "";
+      this.state.status = "";
+      this.state.token = "";
+      this.state.role = "";
     }
   },
-  actions = {
+  
+  actions: {
     login({ commit }, user) {
       return new Promise((resolve, reject) => {
         commit("AUTH_REQUEST");
@@ -45,13 +38,13 @@ const state = {
           });
       });
     },
-    //user registration
+
     register({ commit }, user) {
       return new Promise((resolve, reject) => {
         registerApi(user)
-          .then(resp => {
-            commit("AUTH_SUCESS", resp.data); // token, userRespData);
-            resolve(resp.data);
+          .then(({data}) => {
+            commit("AUTH_SUCESS", data);
+            resolve(data);
           })
           .catch(err => {
             commit("AUTH_ERROR", err);
@@ -59,7 +52,7 @@ const state = {
           });
       });
     },
-    //logout user
+
     logout({ commit }) {
       return new Promise((resolve, reject) => {
         commit("LOGOUT");
@@ -70,11 +63,7 @@ const state = {
           .catch(err => reject(err));
       });
     }
-  };
+  }
+}
 
-export default {
-  state,
-  getters,
-  mutations,
-  actions
-};
+export default user

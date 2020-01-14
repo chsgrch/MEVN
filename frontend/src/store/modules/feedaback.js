@@ -1,36 +1,30 @@
-// import axios from "axios";
-import { getFeedbackAllUserApi } from "../../api/reedbackApi";
+import { getFeedbackAllUserApi } from "../../api/feedbackApi";
 
-const state = {
-    feedback: []
-  },
-  getters = {
-    getAllFeedback: state => state.feedback
-  },
-  mutations = {
-    FEEDBACK_RECEIVED: (state, data) => {
-      state.feedback = data;
+const feedbackModule = {
+
+  mutations: {
+    FEEDBACK_RECEIVED(state, data) {
+      this.state.feedback = data
+    },
+    GET_FEETBACK_ERROR(state, data) {
+      this.state.feedback = null
     }
   },
-  actions = {
+  actions: {
     async getAllFeedback({ commit }) {
       return new Promise((resolve, reject) => {
         getFeedbackAllUserApi()
-          .then(resp => {
-            commit("FEEDBACK_RECEIVED", resp.data.data);
-            resolve(resp.data.data);
+          .then(({data}) => {
+            commit("FEEDBACK_RECEIVED", data.responseData);
+            resolve(data.responseData);
           })
           .catch(err => {
-            commit("get_feedback_error");
+            commit("GET_FEETBACK_ERROR", err);
             reject(err);
           });
       });
     }
-  };
+  }
+}
 
-export default {
-  state,
-  getters,
-  mutations,
-  actions
-};
+export default feedbackModule

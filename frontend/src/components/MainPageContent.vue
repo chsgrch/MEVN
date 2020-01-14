@@ -72,18 +72,13 @@
 </template>
 
 <script>
-import graph from "./graph/graphHarvest.js";
-import VueEasyLightbox from "vue-easy-lightbox";
-import products from "../views/Catalog";
-import sliderControl from "./slider";
-
 export default {
   name: "MainPageContent",
   components: {
-    graph,
-    VueEasyLightbox,
-    products,
-    sliderControl
+    graph: () => import("./graph/graphHarvest.js"),
+    VueEasyLightbox: () => import("vue-easy-lightbox"),
+    products: () => import("../views/Catalog"),
+    sliderControl: () => import("./slider"),
   },
   data: function() {
     return {

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 var axiosRequestInstance = axios.create({
-  baseURL: "http://localhost:8080"
+  baseURL: `${window.location.protocol}//${window.location.host}`
 });
 
 export async function request(reqData) {

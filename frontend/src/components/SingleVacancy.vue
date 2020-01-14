@@ -92,9 +92,6 @@
 </template>
 
 <script>
-import addVacancy from "../components/addVacancy";
-import ModalDirection from "../components/Modal";
-
 function getVal(val) {
   return "#" + val;
 }
@@ -122,8 +119,8 @@ function vacancyDel(propA) {
 export default {
   name: "SingleVacancy",
   components: {
-    addVacancy,
-    ModalDirection
+    addVacancy: () => import("../components/addVacancy"),
+    ModalDirection: () => import("../components/Modal")
   },
   methods: {
     getVal,
