@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class='home'>
     <MainPageContent/>
   </div>
 </template>
@@ -8,7 +8,7 @@
 export default {
   name: 'home',
   components: {
-    MainPageContent: () => import("@/components/MainPageContent.vue")
+    MainPageContent: () => import('@/components/MainPageContent')
   }
 }
 </script>

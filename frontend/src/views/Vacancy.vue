@@ -8,7 +8,7 @@
 export default {
   name: 'vacancyView',
   components: {
-    VacancyComponent: () => import("@/components/VacancyComponent.vue")
+    VacancyComponent: () => import('@/components/VacancyComponent')
   }
 }
 </script>
