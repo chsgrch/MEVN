@@ -14,7 +14,7 @@ exports.index = function (req, res) {
     res.json({
       status: "success",
       message: "Jobs retrieved successfully",
-      data: jobs
+      responseData: jobs
     });
   });
 };
@@ -46,7 +46,7 @@ exports.new = function (req, res) {
         res.json({
           status: "success",
           message: "Job add and all jobs retrieved successfully",
-          data: jobs
+          responseData: jobs
         });
       });
     }
@@ -61,7 +61,7 @@ exports.view = function (req, res) {
     if (err) res.send(err);
     res.json({
       message: "Jobs details loading..",
-      data: jobs
+      responseData: jobs
     });
   });
 };
@@ -83,7 +83,7 @@ exports.update = function (req, res) {
       if (err) res.json(err);
       res.json({
         message: "job Info updated",
-        data: jobs
+        responseData: jobs
       });
     });
   });
@@ -114,7 +114,7 @@ exports.delete = function (req, res) {
           res.json({
             status: "success",
             message: "Job delete and all jobs retrieved successfully",
-            data: jobs
+            responseData: jobs
           });
         });
       }

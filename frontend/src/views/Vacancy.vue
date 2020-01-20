@@ -5,12 +5,10 @@
 </template>
 
 <script>
-import VacancyComponent from '@/components/VacancyComponent.vue'
-
 export default {
   name: 'vacancyView',
   components: {
-    VacancyComponent
+    VacancyComponent: () => import('@/components/VacancyComponent')
   }
 }
 </script>

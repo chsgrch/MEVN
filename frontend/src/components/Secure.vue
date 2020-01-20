@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="mainFeedback">
+    <div class='o-main--feedback'>
       <h2>Отклики пользователей</h2>
 
-      <div id="addFeedbackInfo">
-        <div v-for="item in this.$store.getters.getAllFeedback">
-          <SingleFeedback v-bind:feedback="item" />
+      <div id='o-main--feedback__add-feedback-cycle'>
+        <div v-for='item in this.$store.getters.getAllFeedback'>
+          <SingleFeedback v-bind:feedback='item' />
         </div>
       </div>
     </div>
@@ -13,17 +13,17 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 
 export default {
-  name: "userFeedback",
+  name: 'userFeedback',
   components: {
-    SingleFeedback: () => import("../components/SingleFeedback")
+    SingleFeedback: () => import('../components/SingleFeedback')
   },
   mounted() {
     //Get vacancies in store axios
     this.$store
-      .dispatch("getAllFeedback")
+      .dispatch('getAllFeedback')
       .then(
         response => {
           console.log(`Vacancies: ${response}`);
@@ -35,17 +35,17 @@ export default {
 </script>
 
 <style>
-.mainFeedback h2 {
+.o-main--feedback h2 {
   text-align: center;
 }
-.mainFeedback {
+.o-main--feedback {
   padding-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.mainFeedback #addFeedbackInfo {
+.o-main--feedback #o-main--feedback__add-feedback-cycle {
   width: 100%;
 }
 </style>

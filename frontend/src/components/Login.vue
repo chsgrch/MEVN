@@ -1,23 +1,21 @@
 <template>
-  <div>
-    <div class="pageHeadText">
-      <h3>Вход</h3>
-    </div>
-    <div class="bodyPageContextLogin">
-      <div class="inBodyContentLogin">
-        <form class="login" @submit.prevent="login">
+  <div class='o-main--login'>
+    <h3 class='h3-like'>Вход</h3>
+    <div class='o-main--login main--login__o-row'>
+      <div class='o-main--login main--login__o-row__col'>
+        <form @submit.prevent='login'>
           <hr />
-          <div id="userData">
-            <label for="mail">Email</label>
-            <input id="mail" required v-model="email" type="email" placeholder="Имя" />
+          <div id='col_o__login_info'>
+            <label for='login_info_c_mail'>Email</label>
+            <input id='login_info_c_mail' required v-model='email' type='email' placeholder='Имя' />
           </div>
 
-          <div id="userData">
-            <label for="pass">Пароль</label>
-            <input id="pass" required v-model="password" type="password" placeholder="Пароль" />
+          <div id='col_o__login_info'>
+            <label for='login_info_c_pass'>Пароль</label>
+            <input id='login_info_c_pass' required v-model='password' type='password' placeholder='Пароль' />
           </div>
           <hr />
-          <button type="submit">Вход</button>
+          <button type='submit'>Вход</button>
         </form>
       </div>
     </div>
@@ -28,8 +26,8 @@
 export default {
   data() {
     return {
-      email: "",
-      password: ""
+      email: '',
+      password: ''
     };
   },
   methods: {
@@ -37,8 +35,8 @@ export default {
       let email = this.email;
       let password = this.password;
       this.$store
-        .dispatch("login", { email, password })
-        .then(() => this.$router.push("/"))
+        .dispatch('login', { email, password })
+        .then(() => this.$router.push('/'))
         .catch(err => console.log(err));
     }
   }
@@ -46,26 +44,36 @@ export default {
 </script>
 
 <style>
-.pageHeadText {
+.o-main--login{
+  display: flex;
+  flex-direction: column;
+}
+
+.h3-like{
   text-align: center;
   padding-top: 30px;
 }
-#userData {
-  margin-top: 20px;
+
+.main--login__o-row {
+  align-items: center;
+  width: 100%;
 }
-.bodyPageContextLogin {
-  display: flex;
-  flex-direction: row;
+
+.main--login__o-row__col {
   justify-content: center;
-}
-.inBodyContentLogin {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
   width: 45%;
 }
-.inBodyContentLogin input#mail,
-input#pass {
+
+.main--login__o-row__col form{
+  width: 100%;
+}
+
+#col_o__login_info {
+  margin-top: 20px;
+}
+
+.main--login__o-row__col input#login_info_c_mail,
+input#login_info_c_pass {
   width: 100%;
 }
 </style>

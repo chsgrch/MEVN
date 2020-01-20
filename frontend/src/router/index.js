@@ -1,20 +1,20 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-import About from "../views/About.vue";
-import Vacancy from "../views/Vacancy.vue";
-import gourds from "../views/ ProductGourds.vue";
-import corn from "../views/PrductCorn.vue";
-import sunflower from "../views/ProductSunflower.vue";
-import catalog from "../views/Catalog.vue";
-import contacts from "../views/Contacts.vue";
-import partners from "../views/Partners.vue";
+import Home from "../views/Home";
+import About from "../views/About";
+import Vacancy from "../views/Vacancy";
+import gourds from "../views/ ProductGourds";
+import corn from "../views/PrductCorn";
+import sunflower from "../views/ProductSunflower";
+import catalog from "../views/Catalog";
+import contacts from "../views/Contacts";
+import partners from "../views/Partners";
 
 // import Router from "vue-router";
-import store from "../store.js";
-import Login from "../components/Login.vue";
-import Secure from "../components/Secure.vue";
-import Register from "../components/Register.vue";
+import store from "../store";
+import Login from "../components/Login";
+import Secure from "../components/Secure";
+import Register from "../components/Register";
 
 import Lightbox from "vue-easy-lightbox";
 Vue.use(Lightbox);

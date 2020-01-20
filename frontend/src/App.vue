@@ -2,24 +2,19 @@
   <div id="app">
     <Header />
     <Menu />
-    <div class="routerView">
-      <router-view />
-    </div>
+    <router-view />
     <Footer />
   </div>
 </template>
 
 <script>
-import Menu from "@/components/Menu.vue";
-import Header from "@/components/Header.vue";
-import Footer from "@/components/Footer.vue";
 
 export default {
   name: "App",
   components: {
-    Menu,
-    Header,
-    Footer
+    Menu: () => import('@/components/Menu'),
+    Header: () => import('@/components/Header'),
+    Footer: () => import('@/components/Footer')
   },
   created: function() {
     this.$http.interceptors.response.use(undefined, function(err) {

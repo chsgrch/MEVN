@@ -1,14 +1,14 @@
 <template>
   <footer>
-    <div class="clFooter">
-      <p>Copyright © {{new Date().getFullYear()}} Ваше имя все права защищены</p>
+    <div class='o-layout-footer'>
+      <p class='o-layout-footer__text'>Copyright © {{new Date().getFullYear()}} Ваше имя все права защищены</p>
     </div>
   </footer>
 </template>
 
 <script>
 export default {
-  name: "Footer"
+  name: 'Footer'
 };
 </script>
 
@@ -16,7 +16,7 @@ export default {
 footer {
   margin-top: 100px;
 }
-.clFooter {
+.o-layout-footer {
   padding: 5px;
   display: block;
   position: relative;
@@ -27,7 +27,7 @@ footer {
   color: white;
   text-align: center;
 }
-.clFooter p {
+.o-layout-footer__text {
   margin-top: 0.625em;
 }
 </style>

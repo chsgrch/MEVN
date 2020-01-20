@@ -1,9 +1,9 @@
 <template>
-  <div class="feedbackBlock">
-    <div class="card w-75 mt-4 feedbackBlockInner">
+  <div class='feedback-block'>
+    <div class='card w-75 mt-4 feedback-block__card'>
       <p>
         <strong>Дата:</strong>
-        {{new Date(feedback.create_date).getDate() + "." + (new Date(feedback.create_date).getMonth()+1) + "." + new Date(feedback.create_date).getFullYear()}}
+        {{new Date(feedback.create_date).getDate() + '.' + (new Date(feedback.create_date).getMonth()+1) + '.' + new Date(feedback.create_date).getFullYear()}}
       </p>
       <p>
         <strong>Фамилия:</strong>
@@ -27,7 +27,7 @@
     
 <script>
 export default {
-  name: "singleFeedback",
+  name: 'singleFeedback',
   props: {
     feedback: {
       type: Object
@@ -37,14 +37,17 @@ export default {
 </script>
 
 <style>
-.feedbackBlock {
+.card {
+  margin: 20px;
+}
+.o-main--feedback__add-feedback-cycle {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   min-width: 300px;
 }
-.feedbackBlockInner {
+.feedback-block__card {
   margin: auto;
   padding: 30px;
 }

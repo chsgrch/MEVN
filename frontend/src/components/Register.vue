@@ -1,41 +1,44 @@
 <template>
-  <div>
-    <div class="pageHeadText">
-      <h3>Регистрация</h3>
-    </div>
-    <div class="bodyPageContext">
-      <div class="inBodyContent">
-        <form id="registerForm" @submit.prevent="register">
+  <div class="o-main--register">
+    <h3 class="h3-like">Регистрация</h3>
+    <div class="o-main--register main--register__o-row">
+      <div class="o-main--register main--register__o-row__col">
+        <form @submit.prevent="register">
           <hr />
-          <div id="userData">
-            <label for="name">Имя</label>
+          <div id="col_o__register_info">
+            <label for="register_info_c_name">Имя</label>
             <div>
-              <input id="name" type="text" v-model="name" required autofocus />
+              <input id="register_info_c_name" type="text" v-model="name" required autofocus />
             </div>
           </div>
 
-          <div id="userData">
-            <label for="email">E-Mail</label>
+          <div id="col_o__register_info">
+            <label for="register_info_c_email">E-Mail</label>
             <div>
-              <input id="email" type="email" v-model="email" required />
+              <input id="register_info_c_email" type="email" v-model="email" required />
             </div>
           </div>
 
-          <div id="userData">
-            <label for="password">Пароль</label>
+          <div id="col_o__register_info">
+            <label for="register_info_c_password">Пароль</label>
             <div>
-              <input id="password" type="password" v-model="password" required />
+              <input id="register_info_c_password" type="password" v-model="password" required />
             </div>
           </div>
 
-          <div id="userData">
-            <label for="password-confirm">Повторите ввод пароля</label>
+          <div id="col_o__register_info">
+            <label for="register_info_c_password-confirm">Повторите ввод пароля</label>
             <div>
-              <input id="password-confirm" type="password" v-model="password_confirmation" required />
+              <input
+                id="register_info_c_password-confirm"
+                type="password"
+                v-model="password_confirmation"
+                required
+              />
             </div>
           </div>
 
-          <div id="userData">
+          <div id="col_o__register_info">
             <input type="radio" id="userRadioB" value="user" v-model="role" />
             <label for="userRadioB">Пользователь</label>
             <br />
@@ -44,7 +47,7 @@
             <br />
           </div>
           <hr />
-          <div id="userData">
+          <div id="col_o__register_info">
             <button type="submit">Регистрация</button>
           </div>
         </form>
@@ -82,32 +85,34 @@ export default {
 </script>
 
 <style>
-.pageHeadText {
+.o-main--register {
+  display: flex;
+  flex-direction: column;
+}
+
+.h3-like {
   text-align: center;
   padding-top: 30px;
 }
-#userData {
+.main--register__o-row {
+  align-items: center;
+  width: 100%;
+}
+.main--register__o-row__col {
+  justify-content: center;
+  width: 50%;
+}
+.main--register__o-row__col form {
+  width: 100%;
+}
+#col_o__register_info {
   margin-top: 20px;
 }
-.bodyPageContext {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-.inBodyContent {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  width: 45%;
-}
-.inBodyContent input#name,
-input#password,
-input#password-confirm,
-input#email {
+
+.main--register__o-row__col input#register_info_c_name,
+input#register_info_c_password,
+input#register_info_c_password-confirm,
+input#register_info_c_email {
   width: 100%;
 }
 </style>
-
-
-// #registerForm input#userData 
-// 

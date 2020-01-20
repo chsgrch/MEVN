@@ -1,51 +1,51 @@
 <template>
-  <div class="modalComp">
-    <div class="modal-mask">
-      <div class="modal-wrapper">
-        <div class="modal-container">
-          <form id="uploadForm" name="uploadForm" enctype="multipart/form-data" class="custom-file" @submit.prevent="uploadFiles">
-            <div class="pb-3">
+  <div class='modal-window-review'>
+    <div class='modal-mask'>
+      <div class='modal-wrapper'>
+        <div class='modal-container'>
+          <form id='uploadForm' name='uploadForm' enctype='multipart/form-data' class='custom-file' @submit.prevent='uploadFiles'>
+            <div class='pb-3'>
               <input
-                type="text"
-                placeholder="Фамилия"
-                id="surname"
-                ref="userSurname"
-                name="surname"
+                type='text'
+                placeholder='Фамилия'
+                id='surname'
+                ref='userSurname'
+                name='surname'
                 required
               />
             </div>
-            <div class="pb-3">
-              <input type="text" required placeholder="Имя" id="name" ref="userName" name="name" />
+            <div class='pb-3'>
+              <input type='text' required placeholder='Имя' id='name' ref='userName' name='name' />
             </div>
-            <div class="pb-3">
-              <input type="email" required placeholder="e-mail" id="mail" ref="userMail" name="mail" />
+            <div class='pb-3'>
+              <input type='email' required placeholder='e-mail' id='mail' ref='userMail' name='mail' />
             </div>
 
-            <div class="custom-file">
+            <div class='custom-file'>
               <input
-                type="file"
+                type='file'
                 required
-                ref="userFile"
-                class="custom-file-input"
-                id="files"
-                name="files"
-                @change="previewFiles"
+                ref='userFile'
+                class='custom-file-input'
+                id='files'
+                name='files'
+                @change='previewFiles'
               />
-              <label class="custom-file-label" for="userFile" placeholder="Имя файла">
-                <p v-if="visibleFileName">{{files[0].name}}</p>
+              <label class='custom-file-label' for='userFile' placeholder='Имя файла'>
+                <p v-if='visibleFileName'>{{files[0].name}}</p>
               </label>
             </div>
 
             <div>
-               <button class="btn btn-primary mt-3">Отправить</button>
+               <button class='btn btn-primary mt-3'>Отправить</button>
             </div>
 
             <div>
-              <button type="button" class="btn btn-primary mt-3" @click="$emit('close')">Закрыть</button>
+              <button type='button' class='btn btn-primary mt-3' @click="$emit('close')">Закрыть</button>
             </div>
-            <div v-if="visibleStatusSendResponse" class="pt-3">
-              <p v-if="statusSendToBackend=='complete'">Данные отправлены успешно</p>
-              <p v-if="statusSendToBackend!='' && statusSendToBackend!='complete'">При отправке данных произошла ошибка: "{{this.statusSendToBackend}}"</p>
+            <div v-if='visibleStatusSendResponse' class='pt-3'>
+              <p v-if="statusSendToBackend"=="complete">Данные отправлены успешно</p>
+              <p v-if='statusSendToBackend!="" && statusSendToBackend!="complete">При отправке данных произошла ошибка: '{{this.statusSendToBackend}}'</p>
             </div>
           </form>
         </div>
@@ -55,34 +55,34 @@
 </template>
     
 <script>
-import axios from "axios";
+import axios from 'axios';
 
 export default {
-  name: "modalComp",
+  name: 'modalComp',
   data() {
     return {
       files: [],
       visibleFileName: false,
       visibleStatusSendResponse: false,
-      statusSendToBackend: ""
+      statusSendToBackend: ''
     };
   },
   methods: {
     uploadFiles() {
       this.setStatVisibleResponse;
       var s = this;
-      const data = new FormData(document.getElementById("uploadForm"));
-      var imagefile = document.querySelector("#files");
-      data.append("file", imagefile.files[0]);
-      data.append("surname", this.$refs.userSurname.value); //s.surname
-      data.append("name", this.$refs.userName.value); //s.name
-      data.append("mail", this.$refs.userMail.value); //s.mail
-      data.append("vacansy", this.jobParams.post);
-      data.append("vacansyId", this.jobParams._id);
+      const data = new FormData(document.getElementById('uploadForm'));
+      var imagefile = document.querySelector('#files');
+      data.append('file', imagefile.files[0]);
+      data.append('surname', this.$refs.userSurname.value); //s.surname
+      data.append('name', this.$refs.userName.value); //s.name
+      data.append('mail', this.$refs.userMail.value); //s.mail
+      data.append('vacansy', this.jobParams.post);
+      data.append('vacansyId', this.jobParams._id);
       axios
-        .post("http://127.0.0.1:8080/api/upload", data, {
+        .post('http://127.0.0.1:8080/api/upload', data, {
           headers: {
-            "Content-Type": "multipart/form-data"
+            'Content-Type': 'multipart/form-data'
           }
         })
         .then(response => {
@@ -114,7 +114,7 @@ export default {
 </script>
 
 <style>
-.modalComp {
+.modal-window-review {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -123,13 +123,13 @@ export default {
   background: grey;
 }
 
-.modalComp #uploadForm #name,
+.modal-window-review #uploadForm #name,
 #mail,
 #surname {
   width: 100%;
 }
 
-.modalComp #uploadForm input {
+.modal-window-review #uploadForm input {
   height: calc(1.5em + 0.75rem + 2px);
   border-radius: 0.25rem;
   padding: 5px;

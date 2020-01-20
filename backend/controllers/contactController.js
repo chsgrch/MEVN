@@ -12,7 +12,7 @@ exports.index = function (req, res) {
         res.json({
             status: "success",
             message: "Contacts retrieved successfully",
-            data: contacts
+            responseData: contacts
         });
     });
 };
@@ -31,7 +31,7 @@ exports.new = function (req, res) { //POST
         else
             res.json({
                 message: 'success',
-                data: contact
+                responseData: contact
             });
             console.log(`HERE send _id contact: ${contact._id}`); //GET ID
     });
@@ -46,7 +46,7 @@ exports.view = function (req, res) { //GET
             res.send(err);
         res.json({
             message: 'Contact details loading..',
-            data: contact
+            responseData: contact
         });
     });
 };
@@ -67,7 +67,7 @@ exports.update = function (req, res) { //PUT
                 res.json(err);
             res.json({
                 message: 'Contact Info updated',
-                data: contact
+                responseData: contact
             });
         });
     });

@@ -1,14 +1,9 @@
 <template>
-  <div>
-    <div class="bodyPageContextGourds">
-      <div class="inBodyContentGourds">
-        <div class="headText">
-          <h2>ПРК БЕЛЫЙ ЖЕМЧУГ БАХЧЕВЫЕ</h2>
-        </div>
-        <div>
-          <img src="../img/product/bahcha.jpg" class="img-fluid" alt="Бахчевые" />
-        </div>
-        <div class="gourdsInfo">
+  <div class='o-view-gourds'>
+    <div class='o-view-gourds o-view-gourds__body'>
+        <h2 class='h2-like-gourds'>ПРК БЕЛЫЙ ЖЕМЧУГ БАХЧЕВЫЕ</h2>
+          <img src='../img/product/bahcha.jpg' class='img-fluid' alt='Бахчевые' />
+        <div class='body__gourds-info'>
           <p>
             <strong>Описание:</strong> Био-фитонцидный комплекс (БФК) на органо-минеральной основе.
           </p>
@@ -26,7 +21,6 @@
           </p>
           <p>
             <strong>Совместимость.</strong> Не рекомендуется смешивать с другими агрохимикатами, (кроме линии ПРК «Белый Жемчуг») во избежание снижения эффективности.
-            <strong>Перед приготовлением баковой смеси с СЗР рекомендуется провести тест на совместимость.</strong>
           </p>
           <p>
             <strong>Био-фитонцидный комплекс эффективно выполняет защитные функции, обеспечивает максимальный результат при наличии сбалансированной программы минерального питания.</strong>
@@ -44,28 +38,29 @@
             <strong>Рекомендуется для применения на всех бахчевых, тыквенных культурах и огруцах в системах традиционного и органического земледелия</strong>
           </p>
         </div>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "gourds"
+  name: 'gourds'
 };
 </script>
 
 <style>
-.bodyPageContextGourds {
+.o-view-gourds {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+}
+.o-view-gourds__body{
   justify-content: center;
   padding-top: 20px;
 }
-.headText {
+.h2-like-gourds {
   text-align: center;
 }
-.gourdsInfo {
+.body__gourds-info {
   padding: 30px;
   text-align: justify;
 }
