@@ -15,7 +15,6 @@ const user = {
       this.state.userName = userRespData.user.username
 
       //save user data in local storage
-      console.log(`-> status is: ${this.state.status}, \n-> token is: ${this.state.token}, \n-> role is: ${this.state.role}, \nuserName is ${this.state.userName}`);
       localStorage.setItem("status", this.state.status);
       localStorage.setItem("token", this.state.token);
       localStorage.setItem("user", this.state.user);
