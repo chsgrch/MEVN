@@ -1,44 +1,29 @@
 import { loginApi, registerApi, logOutApi } from "../../api/userAuthApi";
+import { deleteToken, getUserStatus, getUserRole } from '../../utils/auth';
 
 const user = {
 
   mutations: {
     AUTH_REQUEST(state) {
       this.state.status = "loading";
-      localStorage.setItem("status", this.state.status);
+      this.state.userAuthStatus = 'loading'
     },
     AUTH_SUCESS(state, userRespData) {
       this.state.status = "success";
-      this.state.token = userRespData.token;
-      this.state.user = userRespData;
-      this.state.role = userRespData.user.role;
-      this.state.userName = userRespData.user.username
-
-      //save user data in local storage
-      console.log(`-> status is: ${this.state.status}, \n-> token is: ${this.state.token}, \n-> role is: ${this.state.role}, \nuserName is ${this.state.userName}`);
-      localStorage.setItem("status", this.state.status);
-      localStorage.setItem("token", this.state.token);
-      localStorage.setItem("user", this.state.user);
-      localStorage.setItem("role", this.state.role);
-      localStorage.setItem("userName", this.state.userName);
+      this.state.userAuthStatus = getUserStatus() == 'success' ? true : false,
+        this.state.userRole = getUserRole()
     },
     AUTH_ERROR(state) {
       this.state.status = "error";
     },
     LOGOUT(state) {
-      this.state.status = "";
-      this.state.token = "";
-      this.state.role = "";
-
-      //clear user data from local storage
-      localStorage.removeItem("status");
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      localStorage.removeItem("role");
-      localStorage.removeItem("userName");
+      deleteToken();
+      this.state.status = '';
+      this.state.userAuthStatus = '',
+        this.state.userRole = ''
     }
   },
-  
+
   actions: {
     login({ commit }, user) {
       return new Promise((resolve, reject) => {
@@ -58,7 +43,7 @@ const user = {
     register({ commit }, user) {
       return new Promise((resolve, reject) => {
         registerApi(user)
-          .then(({data}) => {
+          .then(({ data }) => {
             commit("AUTH_SUCESS", data);
             resolve(data);
           })
@@ -71,14 +56,14 @@ const user = {
 
     logout({ commit }) {
       return new Promise((resolve, reject) => {
-        commit("LOGOUT");
         logOutApi()
           .then(resp => {
-            resolve();
+            commit("LOGOUT");
+            resolve(resp);
           })
           .catch(err => reject(err));
       });
-    }
+    },
   }
 }
 

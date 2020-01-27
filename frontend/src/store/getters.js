@@ -1,8 +1,13 @@
 export const getters = {
     getAllVacancies: state => state.vacancies,
-    isLoggedIn: state => !!state.token,
-    authStatus: state => state.status,
-    userRole: state => state.role,
     getAllFeedback: state => state.feedback,
-    userName: state => state.userName
+    // ---
+    // isLoggedIn: state => !!state.token,
+    // authStatus: state => state.status,
+    // userRole: state => state.role,
+    // userName: state => state.userName,
+
+    // ------------- by cookie -------------- 
+    getUserAuthStatus: state => state.userAuthStatus,
+    getUserRole: state => state.userRole
   };
