@@ -109,11 +109,9 @@ function vacancyDel(vacancyProperty) {
     .dispatch('deleteVacancy', vacancyProperty._id)
     .then(
       response => {
-        console.log(`Vacancies: ${response}`);
         this.info = this.$store.getters.getAllVacancies;
       }
     )
-    .catch(err => console.log(err));
 }
 
 export default {
