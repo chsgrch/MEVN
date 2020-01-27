@@ -30,6 +30,11 @@ exports.autentificateUser = function(req, res) {
           let token = jwt.sign({ id: user.id }, config.secret, {
             expiresIn: 86400 // expires in 24 hours
           });
+
+        res.cookie('AUTH-TOKEN', token) // options is optional
+        res.cookie('USER-ROLE', user.role)
+        res.cookie('AUTH-STATUS', 'success')
+
           res
             .status(200)
             .json({ message: "correct", auth: true, token: token, user: user });

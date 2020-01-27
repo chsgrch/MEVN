@@ -17,6 +17,7 @@ import Secure from "../components/Secure";
 import Register from "../components/Register";
 
 import Lightbox from "vue-easy-lightbox";
+import {getToken} from '../utils/auth'
 Vue.use(Lightbox);
 
 Vue.use(VueRouter);
@@ -101,7 +102,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (store.getters.isLoggedIn) {
+    if (!!getToken()) {
       next();
       return;
     }
