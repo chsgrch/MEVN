@@ -25,7 +25,6 @@ export default {
     this.$store
       .dispatch('getAllFeedback')
       .then()
-      .catch(err => console.log(err));
   }
 };
 </script>

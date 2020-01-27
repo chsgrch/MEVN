@@ -114,7 +114,6 @@ export default {
   name: "Menu",
   computed: {
     isLoggedIn: function() {
-      console.log(`-> isLoggedIn: ${this.$store.getters.getUserAuthStatus}`);
       return this.$store.getters.getUserAuthStatus;
     },
     isAdmin: function() {
