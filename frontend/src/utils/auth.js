@@ -1,27 +1,25 @@
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
+import JwtDecode from "jwt-decode";
+import Vue from "vue";
 
-const TOKEN_KEY = 'AUTH-TOKEN'
-const USER_ROLE = 'USER-ROLE'
-const USER_AUTH_STATUS = 'AUTH-STATUS'
+const TOKEN_KEY = "AUTH-TOKEN";
 
-export function getToken(){
-    return Cookies.get(TOKEN_KEY)
+export function getToken() {
+  return Cookies.get(TOKEN_KEY);
 }
 
-export function getUserRole(){
-    return Cookies.get(USER_ROLE)
+export function setToken(token) {
+  return Cookies.set(TOKEN_KEY, token);
 }
 
-export function getUserStatus(){
-    return Cookies.get(USER_AUTH_STATUS)
+export function deleteToken() {
+  Cookies.remove(TOKEN_KEY);
 }
 
-export function setToken(token){
-    return Cookies.set(TOKEN_KEY, token)
+export function decodeToken(token) {
+  if (token) {
+    return JwtDecode(token);
+  }
 }
 
-export function deleteToken(){
-    Cookies.remove(TOKEN_KEY);
-    Cookies.remove(USER_AUTH_STATUS);
-    Cookies.remove(USER_ROLE);
-}
+export const bus = new Vue();

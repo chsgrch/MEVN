@@ -1,26 +1,21 @@
 import { loginApi, registerApi, logOutApi } from "../../api/userAuthApi";
-import { deleteToken, getUserStatus, getUserRole } from '../../utils/auth';
+import { deleteToken, getToken, setToken } from "../../utils/auth";
 
 const user = {
-
   mutations: {
     AUTH_REQUEST(state) {
       this.state.status = "loading";
-      this.state.userAuthStatus = 'loading'
     },
     AUTH_SUCESS(state, userRespData) {
+      setToken(getToken());
       this.state.status = "success";
-      this.state.userAuthStatus = getUserStatus() == 'success' ? true : false,
-        this.state.userRole = getUserRole()
     },
     AUTH_ERROR(state) {
       this.state.status = "error";
     },
     LOGOUT(state) {
       deleteToken();
-      this.state.status = '';
-      this.state.userAuthStatus = '',
-        this.state.userRole = ''
+      this.state.status = "";
     }
   },
 
@@ -63,8 +58,8 @@ const user = {
           })
           .catch(err => reject(err));
       });
-    },
+    }
   }
-}
+};
 
-export default user
+export default user;

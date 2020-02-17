@@ -29,14 +29,23 @@ exports.registerUserInBase = function(req, res) {
     user.save(function(err) {
       // Check for validation error
       if (err) res.status(500).send(err);
-      let token = jwt.sign({ id: user._id }, config.secret, {
-        expiresIn: 86400 // expires in 24 hours
-      });
+      let token = jwt.sign(
+        {
+          id: user.id,
+          email: user.email,
+          username: user.username,
+          role: user.role
+        },
+        config.secret,
+        {
+          expiresIn: 86400 // expires in 24 hours
+        }
+      );
+
+      res.cookie("AUTH-TOKEN", token); // options is optional
+
       res.status(200).send({
-        message: "success",
-        auth: true,
-        token: token,
-        user: user
+        message: "success"
       });
       console.log(`send _id user in register route: ${user._id}`); //GET ID
     });
