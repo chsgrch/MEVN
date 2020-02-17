@@ -109,15 +109,31 @@
 </template>
 
 <script>
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
+import { getToken, decodeToken, bus } from "../utils/auth";
 export default {
   name: "Menu",
   computed: {
     isLoggedIn: function() {
-      return this.$store.getters.getUserAuthStatus;
+      return !!this.tokenFromBus;
     },
     isAdmin: function() {
-      return this.$store.getters.getUserRole; //if user role admin => return true
+      if (!!this.tokenFromBus) {
+        return decodeToken(this.tokenFromBus).role == "admin" ? true : false;
+      }
+    },
+    getCookie: function() {
+      return getToken();
+    }
+  },
+  created() {
+    // --- get token from bus
+    bus.$on("auth_sucess", token => {
+      this.tokenFromBus = token;
+    });
+    // --- if token saved in cookie
+    if (!!getToken()) {
+      this.tokenFromBus = getToken();
     }
   },
   methods: {
@@ -125,7 +141,13 @@ export default {
       this.$store.dispatch("logout").then(() => {
         this.$router.push("/login");
       });
-    }
+    },
+    sucessLogin: function(token) {}
+  },
+  data() {
+    return {
+      tokenFromBus: ""
+    };
   }
 };
 </script>

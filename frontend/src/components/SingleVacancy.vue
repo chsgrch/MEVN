@@ -92,6 +92,7 @@
 </template>
 
 <script>
+import { getToken, decodeToken } from "../utils/auth";
 export default {
   name: "SingleVacancy",
   components: {
@@ -103,7 +104,7 @@ export default {
       return val + id;
     },
     getTargetId: function getTargetId(val, id) {
-      return val + id;
+      return "#" + val + id;
     },
     vacancyDel: function vacancyDel(vacancyProperty) {
       this.$store
@@ -124,11 +125,10 @@ export default {
     };
   },
   computed: {
-    isLoggedIn: function() {
-      return this.$store.getters.isLoggedIn;
-    },
     isAdmin: function() {
-      return this.$store.getters.userRole == "admin" ? true : false;
+      if (!!getToken()) {
+        return decodeToken(getToken()).role == "admin" ? true : false;
+      }
     }
   }
 };
@@ -140,6 +140,9 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+.card {
+  margin: 0;
 }
 .card-text {
   text-align: justify;

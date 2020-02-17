@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getToken, setToken, deleteToken } from "./auth";
 
 var axiosRequestInstance = axios.create({
   baseURL: `${window.location.protocol}//${window.location.host}`
@@ -24,13 +25,13 @@ export async function requestAuth(reqData) {
       data: reqData.data
     })
       .then(resp => {
-        const token = resp.data.token;
-        localStorage.setItem("token", token);
+        const token = getToken();
+        setToken(token);
         axios.defaults.headers.common["Authorization"] = token;
         resolve(resp);
       })
       .catch(err => {
-        localStorage.removeItem("token");
+        deleteToken();
         reject(err);
       });
   });
@@ -44,13 +45,13 @@ export async function requestRegisterUser(reqData) {
       data: reqData.data
     })
       .then(resp => {
-        const token = resp.data.token;
-        localStorage.setItem("token", token);
+        const token = getToken();
+        setToken(token);
         axios.defaults.headers.common["Authorization"] = token;
         resolve(resp);
       })
       .catch(err => {
-        localStorage.removeItem("token");
+        deleteToken();
         reject(err);
       });
   });
@@ -59,7 +60,7 @@ export async function requestRegisterUser(reqData) {
 export async function requestLogOut() {
   return new Promise((resolve, reject) => {
     try {
-      localStorage.removeItem("token");
+      deleteToken();
       delete axios.defaults.headers.common["Authorization"];
       resolve();
     } catch {
