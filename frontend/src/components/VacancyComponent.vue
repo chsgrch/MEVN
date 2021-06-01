@@ -1,23 +1,23 @@
 <template>
-  <div class='o-main--all-vacancy'>
-    <div class='o-main--all-vacancy o-main--all-vacancy__vacancy-area'>
+  <div class="o-main--all-vacancy">
+    <div class="o-main--all-vacancy o-main--all-vacancy__vacancy-area">
       <div>
         <h2>Вакансии</h2>
       </div>
       <div>
         <button
-          class='btn btn-primary'
-          v-if='isAdmin'
-          @click='addVacancyInModal=true'
+          class="btn btn-primary"
+          v-if="isAdmin"
+          @click="addVacancyInModal=true"
         >Добавить вакансию</button>
       </div>
-      <div id='add-vacancy-component'>
-        <addVacancy v-if='addVacancyInModal' @close='addVacancyInModal=false'></addVacancy>
+      <div id="add-vacancy-component">
+        <addVacancy v-if="addVacancyInModal" @close="addVacancyInModal=false"></addVacancy>
       </div>
 
-      <div id='show-all-vacancyes'>
-        <div v-for='item in this.$store.getters.getAllVacancies'>
-          <SingleVacancy v-bind:vacancyProperty='item' />
+      <div id="show-all-vacancyes">
+        <div v-for="item in this.$store.getters.getAllVacancies">
+          <SingleVacancy v-bind:vacancyProperty="item" />
         </div>
       </div>
     </div>
@@ -25,12 +25,13 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
+import { getToken, decodeToken } from "../utils/auth";
 export default {
-  name: 'VacancyComponent',
+  name: "VacancyComponent",
   components: {
-    SingleVacancy: () => import('../components/SingleVacancy'),
-    addVacancy: () => import('../components/addVacancy')
+    SingleVacancy: () => import("../components/SingleVacancy"),
+    addVacancy: () => import("../components/addVacancy")
   },
   data: function() {
     return {
@@ -41,28 +42,20 @@ export default {
   },
   mounted() {
     //Get vacancies in store axios
-    this.$store
-      .dispatch('getVacancies')
-      .then(
-        response => {
-          console.log(`Vacancies: ${response}`);
-        }
-      )
-      .catch(err => console.log(err));
+    this.$store.dispatch("getVacancies");
   },
   computed: {
-    isLoggedIn: function() {
-      return this.$store.getters.isLoggedIn;
-    },
     isAdmin: function() {
-      return this.$store.getters.userRole == 'admin' ? true : false;
+      if (!!getToken()) {
+        return decodeToken(getToken()).role == "admin" ? true : false;
+      }
     }
   }
 };
 </script>
 
 <style>
-.o-main--all-vacancy{
+.o-main--all-vacancy {
   display: flex;
   flex-direction: column;
 }

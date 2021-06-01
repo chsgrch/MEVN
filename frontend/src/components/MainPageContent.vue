@@ -1,29 +1,29 @@
 <template>
-  <div class='o-main'>
-    <div class='o-main o-main__header-field'>
-      <div class='header-field__img-field'>
-        <img src='../img/favicon/fav.png' class='img-fluid header-img-like' alt='Header ico' />
+  <div class="o-main">
+    <div class="o-main o-main__header-field">
+      <div class="header-field__img-field">
+        <img src="../img/favicon/fav.png" class="img-fluid header-img-like" alt="Header ico" />
       </div>
-      <div class='o-main header-field__text-field'>
-        <div class='o-main text-field__page-header'>
+      <div class="o-main header-field__text-field">
+        <div class="o-main text-field__page-header">
           <h2>ООО «Колос»</h2>
           <h2>технологии управления урожаем-мечтой!</h2>
         </div>
       </div>
     </div>
-    <div class='o-main o-main__body-page'>
-      <div class='o-main body-page__content-page-main'>
-        <div class='content-page-main__slider'>
+    <div class="o-main o-main__body-page">
+      <div class="o-main body-page__content-page-main">
+        <div class="content-page-main__slider">
           <sliderControl></sliderControl>
         </div>
 
-        <div class='content-page-main__text-block'>
+        <div class="content-page-main__text-block">
           <strong>ООО “Колос”</strong> является российским производителем уникальных, натуральных, органо-минеральных питательных комплексов
           для выращивания растений в открытом и защищенном грунте. Линии «ПРК Белый Жемчуг», «ПРК Черный Жемчуг», благодаря высокой эффективности,
           пользуются большим спросом в России и за рубежом. Сотрудничество с международными компаниями: Atlantica Agricola (Испания) и Penergetic
           ( Швейцария) – обеспечивает высокий профессиональный уровень технологий питания растений. Благодаря нашим удобрениям удалось повысить показатели
           сбора урожая для таких зерновых культур, как пшеница, ячмень и гречиха. Ниже на графике данные представлены наглядно.
-          <div class='text-block__sub-header'>
+          <div class="text-block__sub-header">
             <h2>График урожайности</h2>
           </div>
           <graph></graph>
@@ -40,32 +40,32 @@
 
         <products></products>
 
-        <div class='content-page-main__sub-header'>
+        <div class="content-page-main__sub-header">
           <h2>Наши сертификаты</h2>
         </div>
-        <div class='content-page-main__sert'>
-            <img
-              src='../img/sertificates/svid_agroplus_lab.jpg'
-              alt='svid_agroplus_lab.jpg'
-              class='shadow scale img-sert-size'
-              @click='showSingleUrlSert1'
-            />
-            <img
-              src='../img/sertificates/svid_lab_1.jpg'
-              alt='svid_lab_1.jpg'
-              class='shadow scale img-sert-size'
-              @click='showSingleUrlSert2'
-            />
+        <div class="content-page-main__sert">
+          <img
+            src="../img/sertificates/svid_agroplus_lab.jpg"
+            alt="svid_agroplus_lab.jpg"
+            class="shadow scale img-sert-size"
+            @click="showSingleUrlSert1"
+          />
+          <img
+            src="../img/sertificates/svid_lab_1.jpg"
+            alt="svid_lab_1.jpg"
+            class="shadow scale img-sert-size"
+            @click="showSingleUrlSert2"
+          />
         </div>
 
         <div>
           <vue-easy-lightbox
             escDisabled
             moveDisabled
-            :visible='visible'
-            :imgs='imgs'
-            :index='index'
-            @hide='handleHide'
+            :visible="visible"
+            :imgs="imgs"
+            :index="index"
+            @hide="handleHide"
           ></vue-easy-lightbox>
         </div>
       </div>
@@ -74,28 +74,29 @@
 </template>
 
 <script>
+import { getToken, decodeToken } from "../utils/auth";
 export default {
-  name: 'MainPageContent',
+  name: "MainPageContent",
   components: {
-    graph: () => import('./graph/graphHarvest.js'),
-    VueEasyLightbox: () => import('vue-easy-lightbox'),
-    products: () => import('../views/Catalog'),
-    sliderControl: () => import('./slider')
+    graph: () => import("./graph/graphHarvest.js"),
+    VueEasyLightbox: () => import("vue-easy-lightbox"),
+    products: () => import("../views/Catalog"),
+    sliderControl: () => import("./slider")
   },
   data: function() {
     return {
       visible: false,
       index: 0,
-      imgs: ''
+      imgs: ""
     };
   },
   methods: {
     showSingleUrlSert1() {
-      this.imgs = 'http://localhost:8081/img/svid_agroplus_lab.c25ac7bd.jpg';
+      this.imgs = "http://localhost:8081/img/svid_agroplus_lab.c25ac7bd.jpg";
       this.show();
     },
     showSingleUrlSert2() {
-      this.imgs = 'http://localhost:8081/img/svid_lab_1.68f071bb.jpg';
+      this.imgs = "http://localhost:8081/img/svid_lab_1.68f071bb.jpg";
       this.show();
     },
     show() {

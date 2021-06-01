@@ -44,8 +44,8 @@
               <button type='button' class='btn btn-primary mt-3' @click="$emit('close')">Закрыть</button>
             </div>
             <div v-if='visibleStatusSendResponse' class='pt-3'>
-              <p v-if="statusSendToBackend"=="complete">Данные отправлены успешно</p>
-              <p v-if='statusSendToBackend!="" && statusSendToBackend!="complete">При отправке данных произошла ошибка: '{{this.statusSendToBackend}}'</p>
+              <p v-if='statusSendToBackend=="complete"'>Данные отправлены успешно</p>
+              <p v-if='!statusSendToBackend && statusSendToBackend!="complete"'>При отправке данных произошла ошибка: {{this.statusSendToBackend}}</p>
             </div>
           </form>
         </div>
@@ -86,12 +86,10 @@ export default {
           }
         })
         .then(response => {
-          console.log(response);
           this.statusSendToBackend = response.data;
         })
         .catch(error => {
           this.statusSendToBackend = error.response!=undefined ? error.response.data : 'Отсутствует соединение с сервером';
-          console.log(` -> ERROR RESPONSE: ${error.response}`);
         });
     },
     // writeContactsInBase,

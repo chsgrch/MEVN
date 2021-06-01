@@ -1,43 +1,24 @@
 import { loginApi, registerApi, logOutApi } from "../../api/userAuthApi";
+import { deleteToken, getToken, setToken } from "../../utils/auth";
 
 const user = {
-
   mutations: {
     AUTH_REQUEST(state) {
       this.state.status = "loading";
-      localStorage.setItem("status", this.state.status);
     },
     AUTH_SUCESS(state, userRespData) {
+      setToken(getToken());
       this.state.status = "success";
-      this.state.token = userRespData.token;
-      this.state.user = userRespData;
-      this.state.role = userRespData.user.role;
-      this.state.userName = userRespData.user.username
-
-      //save user data in local storage
-      localStorage.setItem("status", this.state.status);
-      localStorage.setItem("token", this.state.token);
-      localStorage.setItem("user", this.state.user);
-      localStorage.setItem("role", this.state.role);
-      localStorage.setItem("userName", this.state.userName);
     },
     AUTH_ERROR(state) {
       this.state.status = "error";
     },
     LOGOUT(state) {
+      deleteToken();
       this.state.status = "";
-      this.state.token = "";
-      this.state.role = "";
-
-      //clear user data from local storage
-      localStorage.removeItem("status");
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      localStorage.removeItem("role");
-      localStorage.removeItem("userName");
     }
   },
-  
+
   actions: {
     login({ commit }, user) {
       return new Promise((resolve, reject) => {
@@ -57,7 +38,7 @@ const user = {
     register({ commit }, user) {
       return new Promise((resolve, reject) => {
         registerApi(user)
-          .then(({data}) => {
+          .then(({ data }) => {
             commit("AUTH_SUCESS", data);
             resolve(data);
           })
@@ -70,15 +51,15 @@ const user = {
 
     logout({ commit }) {
       return new Promise((resolve, reject) => {
-        commit("LOGOUT");
         logOutApi()
           .then(resp => {
-            resolve();
+            commit("LOGOUT");
+            resolve(resp);
           })
           .catch(err => reject(err));
       });
     }
   }
-}
+};
 
-export default user
+export default user;

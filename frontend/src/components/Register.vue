@@ -57,6 +57,7 @@
 </template>
 
 <script>
+import { bus, getToken } from "../utils/auth";
 export default {
   data() {
     return {
@@ -75,10 +76,10 @@ export default {
         password: this.password,
         role: this.role
       };
-      this.$store
-        .dispatch("register", data)
-        .then(() => this.$router.push("/"))
-        .catch(err => console.log(err));
+      this.$store.dispatch("register", data).then(() => {
+        this.$router.push("/");
+        bus.$emit("auth_sucess", getToken());
+      });
     }
   }
 };
