@@ -18,29 +18,41 @@ exports.autentificateUser = function(req, res) {
         var err = new Error("User not found.");
         err.status = 401;
         res.json(err);
+      } else {
+        bcrypt.compare(userParam.password, user.password, function(
+          err,
+          result
+        ) {
+          if (err) {
+            res.json({
+              err: err,
+              message: "uncorrect"
+            });
+          }
+          if (result === true) {
+            let token = jwt.sign(
+              {
+                id: user.id,
+                email: user.email,
+                username: user.username,
+                role: user.role
+              },
+              config.secret,
+              {
+                expiresIn: 86400 // expires in 24 hours
+              }
+            );
+            res.cookie("AUTH-TOKEN", token); // options is optional
+
+            res.status(200).json({ message: "correct" });
+            console.log(`send _id user in authentificate route: ${user._id}`); //GET ID
+          } else {
+            res.json({
+              message: "uncorrect"
+            });
+          }
+        });
       }
-      bcrypt.compare(userParam.password, user.password, function(err, result) {
-        if (err) {
-          res.json({
-            err: err,
-            message: "uncorrect"
-          });
-        }
-        if (result === true) {
-          let token = jwt.sign({ id: user.id }, config.secret, {
-            expiresIn: 86400 // expires in 24 hours
-          });
-          res
-            .status(200)
-            .json({ message: "correct", auth: true, token: token, user: user });
-          console.log(`send _id user in authentificate route: ${user._id}`); //GET ID
-        } else {
-          res.json({
-            message: "uncorrect",
-            user: user
-          });
-        }
-      });
     });
   } else {
     let err = new Error("Необходимо заполнить все поля");

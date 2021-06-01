@@ -1,21 +1,28 @@
 <template>
-  <div class='o-main--login'>
-    <h3 class='h3-like'>Вход</h3>
-    <div class='o-main--login main--login__o-row'>
-      <div class='o-main--login main--login__o-row__col'>
-        <form @submit.prevent='login'>
+  <div class="o-main--login">
+    <h3 class="h3-like">Вход</h3>
+    <div class="o-main--login main--login__o-row">
+      <div class="o-main--login main--login__o-row__col">
+        <form @submit.prevent="login">
           <hr />
-          <div id='col_o__login_info'>
-            <label for='login_info_c_mail'>Email</label>
-            <input id='login_info_c_mail' required v-model='email' type='email' placeholder='Имя' />
+          <div id="col_o__login_info">
+            <label for="login_info_c_mail">Email</label>
+            <input id="login_info_c_mail" required v-model="email" type="email" placeholder="Имя" />
           </div>
 
-          <div id='col_o__login_info'>
-            <label for='login_info_c_pass'>Пароль</label>
-            <input id='login_info_c_pass' required v-model='password' type='password' placeholder='Пароль' />
+          <div id="col_o__login_info">
+            <label for="login_info_c_pass">Пароль</label>
+            <input
+              id="login_info_c_pass"
+              required
+              v-model="password"
+              type="password"
+              placeholder="Пароль"
+            />
           </div>
           <hr />
-          <button type='submit'>Вход</button>
+          <button type="submit">Вход</button>
+          <p class="pt-3 text-danger">{{errorLogin}}</p>
         </form>
       </div>
     </div>
@@ -23,11 +30,13 @@
 </template>
 
 <script>
+import { bus, getToken } from "../utils/auth";
 export default {
   data() {
     return {
-      email: '',
-      password: ''
+      email: "",
+      password: "",
+      errorLogin: ""
     };
   },
   methods: {
@@ -35,21 +44,26 @@ export default {
       let email = this.email;
       let password = this.password;
       this.$store
-        .dispatch('login', { email, password })
-        .then(() => this.$router.push('/'))
-        .catch(err => console.log(err));
+        .dispatch("login", { email, password })
+        .then(() => {
+          bus.$emit("auth_sucess", getToken());
+          this.$router.push("/");
+        })
+        .catch(err => {
+          this.errorLogin = "Authorization error, login or password incorrect";
+        });
     }
   }
 };
 </script>
 
 <style>
-.o-main--login{
+.o-main--login {
   display: flex;
   flex-direction: column;
 }
 
-.h3-like{
+.h3-like {
   text-align: center;
   padding-top: 30px;
 }
@@ -64,7 +78,7 @@ export default {
   width: 45%;
 }
 
-.main--login__o-row__col form{
+.main--login__o-row__col form {
   width: 100%;
 }
 

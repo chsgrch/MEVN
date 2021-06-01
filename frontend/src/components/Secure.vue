@@ -24,12 +24,7 @@ export default {
     //Get vacancies in store axios
     this.$store
       .dispatch('getAllFeedback')
-      .then(
-        response => {
-          console.log(`Vacancies: ${response}`);
-        }
-      )
-      .catch(err => console.log(err));
+      .then()
   }
 };
 </script>

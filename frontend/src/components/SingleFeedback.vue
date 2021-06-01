@@ -3,7 +3,7 @@
     <div class='card w-75 mt-4 feedback-block__card'>
       <p>
         <strong>Дата:</strong>
-        {{new Date(feedback.create_date).getDate() + '.' + (new Date(feedback.create_date).getMonth()+1) + '.' + new Date(feedback.create_date).getFullYear()}}
+        {{feedback.create_date | moment}}
       </p>
       <p>
         <strong>Фамилия:</strong>
@@ -26,11 +26,17 @@
 </template>
     
 <script>
+import moment from 'moment'
 export default {
   name: 'singleFeedback',
   props: {
     feedback: {
       type: Object
+    }
+  },
+  filters: {
+    moment(date){
+      return moment(date).locale('ru').format('ll');
     }
   }
 };
